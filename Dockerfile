@@ -1,9 +1,14 @@
 FROM node:20-alpine
 
+# Install build dependencies for bcrypt
+RUN apk add --no-cache python3 make g++
+
 WORKDIR /app
 
-# Install dependencies
+# Copy package files
 COPY package*.json ./
+
+# Install dependencies (bcrypt will be compiled for Alpine)
 RUN npm install
 
 # Copy source code
